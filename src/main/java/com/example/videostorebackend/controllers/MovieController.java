@@ -16,6 +16,7 @@ public class MovieController {
     @Autowired
     private MovieService service;
 
+
     @GetMapping("/movies")
     public List<Movie> getMovies(){
         return service.getMovies();
@@ -25,4 +26,5 @@ public class MovieController {
     public void addMovie(@RequestBody Movie movie){
         service.insertIntoMovies(movie);
     }
+
 }

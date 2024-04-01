@@ -15,6 +15,8 @@ public class MovieService {
         return repository.findAll();
     }
 
+    public  List<Movie> getFeaturedMovies() { return null;}
+
     public void insertIntoMovies(Movie movie){
         repository.insert(movie);
     }
