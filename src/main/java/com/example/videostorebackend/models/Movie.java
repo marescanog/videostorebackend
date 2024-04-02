@@ -22,7 +22,7 @@ public class Movie {
     private int length;
     private String releaseDate;
     private String TrailerUrl;
-    private boolean isFeatured;
+    private boolean IsFeatured;
     private String addedOn;
     private String promoType;
     private boolean mostDemanded;
@@ -45,8 +45,8 @@ public class Movie {
         this.MPARating = MPARating;
         this.length = length;
         this.releaseDate = releaseDate;
-        TrailerUrl = trailerUrl;
-        this.isFeatured = isFeatured;
+        this.TrailerUrl = trailerUrl;
+        this.IsFeatured = isFeatured;
         this.addedOn = addedOn;
         this.promoType = promoType;
         this.mostDemanded = mostDemanded;
@@ -159,11 +159,11 @@ public class Movie {
     }
 
     public boolean isFeatured() {
-        return isFeatured;
+        return IsFeatured;
     }
 
     public void setFeatured(boolean featured) {
-        isFeatured = featured;
+        IsFeatured = featured;
     }
 
     public String getAddedOn() {
@@ -222,7 +222,7 @@ public class Movie {
                 ", length=" + length +
                 ", releaseDate='" + releaseDate + '\'' +
                 ", TrailerUrl='" + TrailerUrl + '\'' +
-                ", isFeatured=" + isFeatured +
+                ", isFeatured=" + IsFeatured +
                 ", addedOn='" + addedOn + '\'' +
                 ", promoType='" + promoType + '\'' +
                 ", mostDemanded=" + mostDemanded +

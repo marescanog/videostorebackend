@@ -14,6 +14,17 @@ import java.util.List;
 
 @RestController
 public class TVShowController {
+
+    /* Expected Endpoints from React App
+     *
+     *  /shows?IsFeatured=true
+     *
+     *  /shows?free=on&genre=Action&sort=recentlyAdded
+     *
+     *  /shows?name=generic_name
+     *
+     * */
+
     @Autowired
     private TVShowService service;
 
