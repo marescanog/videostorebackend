@@ -10,6 +10,6 @@ public class MongoConfig {
 
     @Bean
     public MongoTemplate mongoTemplate() throws Exception {
-        return new MongoTemplate(MongoClients.create("mongodb+srv://videostoreapp:vFjY0T5Y6Sasruf3@cluster0.mz9lbam.mongodb.net/videostore?retryWrites=true"), "videostore");
+        return new MongoTemplate(MongoClients.create("mongodb+srv://<USERNAME>:<PASSWORD>@cluster0.mz9lbam.mongodb.net/videostore?retryWrites=true"), "videostore");
     }
 }
