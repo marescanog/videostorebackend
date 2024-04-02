@@ -24,19 +24,16 @@ public class TVShow {
     private String addedOn;
     private String releaseYear;
     private int totalRatings;
-    private boolean isFeatured;
+    private boolean IsFeatured;
     private String mparating;
     private String TrailerUrl;
-
-
-
-
+    private boolean mostDemanded;
 
 
     public TVShow() {
     }
 
-    public TVShow(String id, String title, int numOfSeasons, int numOfTotalEpisodes, String description, String rating, List<String> genre, float rentPrice, float buyPrice, String posterImage, String backgroundImage, String MPARating, String releaseDate, String trailerUrl, boolean isFeatured, String promoType, String addedOn, String releaseYear, int totalRatings) {
+    public TVShow(String id, String title, int numOfSeasons, int numOfTotalEpisodes, String description, String rating, List<String> genre, float rentPrice, float buyPrice, String posterImage, String backgroundImage, String releaseDate, String promoType, String addedOn, String releaseYear, int totalRatings, boolean isFeatured, String mparating, String trailerUrl, boolean mostDemanded) {
         this.id = id;
         this.title = title;
         this.numOfSeasons = numOfSeasons;
@@ -48,14 +45,15 @@ public class TVShow {
         this.buyPrice = buyPrice;
         this.posterImage = posterImage;
         this.backgroundImage = backgroundImage;
-        this.mparating = MPARating;
         this.releaseDate = releaseDate;
-        TrailerUrl = trailerUrl;
-        this.isFeatured = isFeatured;
         this.promoType = promoType;
         this.addedOn = addedOn;
         this.releaseYear = releaseYear;
         this.totalRatings = totalRatings;
+        this.IsFeatured = isFeatured;
+        this.mparating = mparating;
+        this.TrailerUrl = trailerUrl;
+        this.mostDemanded = mostDemanded;
     }
 
     public String getId() {
@@ -146,36 +144,12 @@ public class TVShow {
         this.backgroundImage = backgroundImage;
     }
 
-    public String getMPARating() {
-        return mparating;
-    }
-
-    public void setMPARating(String MPARating) {
-        this.mparating = MPARating;
-    }
-
     public String getReleaseDate() {
         return releaseDate;
     }
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
-    }
-
-    public String getTrailerUrl() {
-        return TrailerUrl;
-    }
-
-    public void setTrailerUrl(String trailerUrl) {
-        TrailerUrl = trailerUrl;
-    }
-
-    public boolean isFeatured() {
-        return isFeatured;
-    }
-
-    public void setFeatured(boolean featured) {
-        isFeatured = featured;
     }
 
     public String getPromoType() {
@@ -210,9 +184,41 @@ public class TVShow {
         this.totalRatings = totalRatings;
     }
 
+    public boolean isFeatured() {
+        return IsFeatured;
+    }
+
+    public void setFeatured(boolean featured) {
+        IsFeatured = featured;
+    }
+
+    public String getMparating() {
+        return mparating;
+    }
+
+    public void setMparating(String mparating) {
+        this.mparating = mparating;
+    }
+
+    public String getTrailerUrl() {
+        return TrailerUrl;
+    }
+
+    public void setTrailerUrl(String trailerUrl) {
+        TrailerUrl = trailerUrl;
+    }
+
+    public boolean isMostDemanded() {
+        return mostDemanded;
+    }
+
+    public void setMostDemanded(boolean mostDemanded) {
+        this.mostDemanded = mostDemanded;
+    }
+
     @Override
     public String toString() {
-        return "TVShows{" +
+        return "TVShow{" +
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", numOfSeasons=" + numOfSeasons +
@@ -224,14 +230,15 @@ public class TVShow {
                 ", buyPrice=" + buyPrice +
                 ", posterImage='" + posterImage + '\'' +
                 ", backgroundImage='" + backgroundImage + '\'' +
-                ", MPARating='" + mparating + '\'' +
                 ", releaseDate='" + releaseDate + '\'' +
-                ", TrailerUrl='" + TrailerUrl + '\'' +
-                ", isFeatured=" + isFeatured +
                 ", promoType='" + promoType + '\'' +
                 ", addedOn='" + addedOn + '\'' +
                 ", releaseYear='" + releaseYear + '\'' +
                 ", totalRatings=" + totalRatings +
+                ", isFeatured=" + IsFeatured +
+                ", mparating='" + mparating + '\'' +
+                ", TrailerUrl='" + TrailerUrl + '\'' +
+                ", mostDemanded=" + mostDemanded +
                 '}';
     }
 }

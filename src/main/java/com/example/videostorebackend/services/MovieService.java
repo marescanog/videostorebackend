@@ -35,6 +35,7 @@ public class MovieService {
 
     public List<Movie> getFilteredSearch(String free, String genre, String sort, String name) {
         Query query = new Query();
+
         // Genre Filter
         if (genre != null && !genre.isEmpty()) {
             query.addCriteria(Criteria.where("genre").in(genre));
@@ -58,6 +59,11 @@ public class MovieService {
                     query.with(Sort.by(Sort.Direction.ASC, "addedOn"));
                     break;
             }
+        }
+
+        // Name Filter
+        if (name != null) {
+            query.addCriteria(Criteria.where("title").regex(name, "i"));
         }
 
         return mongoTemplate.find(query, Movie.class);
