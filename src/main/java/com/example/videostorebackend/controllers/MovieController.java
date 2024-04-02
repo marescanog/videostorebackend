@@ -83,13 +83,13 @@ public class MovieController {
     }
 
     @GetMapping("/mostDemanded")
-    public ResponseEntity<List<Movie>> getMostDemandedMoviesAndShows(
+    public ResponseEntity<List<Object>> getMostDemandedMoviesAndShows(
             @RequestParam(name = "releaseYear", required = false) String releaseYear
     ){
         if(releaseYear!=null) {
             return null;
         }
-        return null;
+        return new ResponseEntity<>(service.getMostDemandedShowsAndMovies(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/movies",consumes={MediaType.APPLICATION_JSON_VALUE})
