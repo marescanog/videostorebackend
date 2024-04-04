@@ -2,28 +2,33 @@ package com.example.videostorebackend.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Document("users")
-public class User {
+public class User implements UserDetails {
     @Id
     private String id;
     private String firstname;
     private String lastname;
     private String email;
-    private boolean isVerified;
-    private boolean isAdmin;
+    private String role;
     private String password;
 
     public User() {
     }
 
-    public User(String id, String firstName, String lastName, String email, boolean isVerified, boolean isAdmin, String password) {
+    public User(String id, String firstname, String lastname, String email, String role, String password) {
         this.id = id;
-        this.firstname = firstName;
-        this.lastname = lastName;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.email = email;
-        this.isVerified = isVerified;
-        this.isAdmin = isAdmin;
+        this.role = role;
         this.password = password;
     }
 
@@ -35,20 +40,20 @@ public class User {
         this.id = id;
     }
 
-    public String getFirstName() {
+    public String getFirstname() {
         return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstname = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
+    public String getLastname() {
         return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastname = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -59,24 +64,44 @@ public class User {
         this.email = email;
     }
 
-    public boolean isVerified() {
-        return isVerified;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public void setVerified(boolean verified) {
-        isVerified = verified;
-    }
-
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(this.role));
+        return authorities;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setPassword(String password) {
@@ -85,14 +110,17 @@ public class User {
 
     @Override
     public String toString() {
-        return "Users{" +
+        return "User{" +
                 "id='" + id + '\'' +
-                ", firstName='" + firstname + '\'' +
-                ", lastName='" + lastname + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
-                ", isVerified=" + isVerified +
-                ", isAdmin=" + isAdmin +
+                ", role='" + role + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    public String getRole() {
+        return role;
     }
 }
