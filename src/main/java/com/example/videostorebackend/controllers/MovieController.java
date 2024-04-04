@@ -41,6 +41,7 @@ public class MovieController {
             @RequestParam(name = "sort", required = false) String sort,
             @RequestParam(name = "name", required = false) String name
     ){
+        System.out.println(free);
         if(IsFeatured) {
             return new ResponseEntity<>(service.getFeaturedMovies(), HttpStatus.OK);
         }
@@ -84,10 +85,10 @@ public class MovieController {
 
     @GetMapping("/mostDemanded")
     public ResponseEntity<List<Object>> getMostDemandedMoviesAndShows(
-            @RequestParam(name = "releaseYear", required = false) String releaseYear
+            @RequestParam(name = "releaseYear", required = false) Integer releaseYear
     ){
         if(releaseYear!=null) {
-            return null;
+            return new ResponseEntity<>(service.getMostDemandedByReleaseyear(releaseYear), HttpStatus.OK);
         }
         return new ResponseEntity<>(service.getMostDemandedShowsAndMovies(), HttpStatus.OK);
     }

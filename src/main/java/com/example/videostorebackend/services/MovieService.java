@@ -86,4 +86,20 @@ public class MovieService {
 
         return combinedResults;
     }
+
+    public List<Object> getMostDemandedByReleaseyear(Integer releaseYear) {
+        Query query = new Query();
+
+        query.addCriteria(Criteria.where("mostDemanded").is(true));
+        query.addCriteria(Criteria.where("releaseYear").is(releaseYear));
+
+        List<Movie> mostDemandedMovies = mongoTemplate.find(query, Movie.class);
+        List<TVShow> mostDemandedTVShows = mongoTemplate.find(query, TVShow.class);
+
+        List<Object> combinedResults = new ArrayList<>();
+        combinedResults.addAll(mostDemandedMovies);
+        combinedResults.addAll(mostDemandedTVShows);
+
+        return combinedResults;
+    }
 }
