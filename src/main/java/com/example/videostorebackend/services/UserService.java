@@ -10,6 +10,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsManager {
@@ -56,7 +57,10 @@ public class UserService implements UserDetailsManager {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("hi");
         return repository.findByEmail(username);
+    }
+
+    public Optional<User> getUserById(String id) {
+        return repository.findById(id);
     }
 }

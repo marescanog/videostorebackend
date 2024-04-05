@@ -1,9 +1,6 @@
 package com.example.videostorebackend.services;
 
-import com.example.videostorebackend.models.Movie;
-import com.example.videostorebackend.models.MovieRepository;
-import com.example.videostorebackend.models.TVShow;
-import com.example.videostorebackend.models.TVShowRepository;
+import com.example.videostorebackend.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -13,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieService {
@@ -101,5 +99,9 @@ public class MovieService {
         combinedResults.addAll(mostDemandedTVShows);
 
         return combinedResults;
+    }
+
+    public Optional<Movie> getMovieById(String id) {
+        return repository.findById(id);
     }
 }

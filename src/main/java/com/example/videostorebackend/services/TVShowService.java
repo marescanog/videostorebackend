@@ -3,6 +3,7 @@ package com.example.videostorebackend.services;
 import com.example.videostorebackend.models.Movie;
 import com.example.videostorebackend.models.TVShow;
 import com.example.videostorebackend.models.TVShowRepository;
+import com.example.videostorebackend.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TVShowService {
@@ -71,6 +73,8 @@ public class TVShowService {
         repository.insert(tvshow);
     }
 
-
+    public Optional<TVShow> getTVShowById(String id) {
+        return repository.findById(id);
+    }
 
 }

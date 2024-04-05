@@ -1,6 +1,7 @@
 package com.example.videostorebackend.controllers;
 
 import com.example.videostorebackend.models.Movie;
+import com.example.videostorebackend.models.TVShow;
 import com.example.videostorebackend.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 public class MovieController {
@@ -98,4 +101,14 @@ public class MovieController {
         service.insertIntoMovies(movie);
     }
 
+    @GetMapping("/movie/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable String id) {
+        Optional<Movie> found = service.getMovieById(id);
+
+        if(found.isPresent()){
+            return ResponseEntity.ok(found);
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "Movie not found!"));
+    }
 }

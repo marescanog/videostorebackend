@@ -3,6 +3,7 @@ package com.example.videostorebackend.controllers;
 
 import com.example.videostorebackend.models.Movie;
 import com.example.videostorebackend.models.TVShow;
+import com.example.videostorebackend.models.User;
 import com.example.videostorebackend.services.TVShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 public class TVShowController {
@@ -85,5 +88,16 @@ public class TVShowController {
     @PostMapping(value = "/tvshows",consumes={MediaType.APPLICATION_JSON_VALUE})
     public void addTVShow(@RequestBody TVShow tvshow){
         service.insertIntoTVShows(tvshow);
+    }
+
+    @GetMapping("/tvshow/{id}")
+    public ResponseEntity<?> getTVShowById(@PathVariable String id) {
+        Optional<TVShow> found = service.getTVShowById(id);
+
+        if(found.isPresent()){
+            return ResponseEntity.ok(found);
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "TV Show not found!"));
     }
 }

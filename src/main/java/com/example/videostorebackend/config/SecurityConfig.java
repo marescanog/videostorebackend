@@ -30,36 +30,6 @@ import java.util.Collections;
 @EnableWebSecurity
 public class SecurityConfig {
 
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
-//        requestHandler.setCsrfRequestAttributeName("_csrf");
-//
-//        http.cors().configurationSource(new CorsConfigurationSource() {
-//                    @Override
-//                    public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-//                        CorsConfiguration config = new CorsConfiguration();
-//                        config.setAllowedOrigins(Arrays.asList(
-//                                "http://localhost:3000", // Local development domain
-//                                "https://cjv-video-store-qybnro8a4-jonesyjacks-projects.vercel.app"   // Production domain
-//                        ));
-//                        config.setAllowedMethods(Collections.singletonList("*"));
-//                        config.setAllowCredentials(true);
-//                        config.setAllowedHeaders(Collections.singletonList("*"));
-//                        config.setMaxAge(3600L);
-//                        return config;
-//                    }
-//                })
-//                .and().csrf((csrf)->csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/register")
-//                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
-//                .and().authorizeHttpRequests()
-//                    .requestMatchers("/users").authenticated()
-//                    .requestMatchers( "/shows/**", "/tv**", "/movies/**", "/movies**", "/", "/mostDemanded", "/login", "/register").permitAll()
-//                .and().formLogin()
-//                .and().httpBasic();
-//        return http.build();
-//    }
-
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
@@ -86,9 +56,9 @@ public class SecurityConfig {
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                         .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests((requests)->requests
-                        .requestMatchers("/users").authenticated()
+                        .requestMatchers("/user","/users", "/singleUser/**").authenticated()
                         .requestMatchers(HttpMethod.POST, "/register", "/signup").permitAll()
-                        .requestMatchers( "/shows/**", "/tv**", "/movies/**", "/movies**", "/", "/mostDemanded", "/login", "/register", "/signup").permitAll())
+                        .requestMatchers( "/shows/**", "/tv**", "/tv/**","/movie/**", "/tvshow/**","/movies/**", "/movies**", "/", "/mostDemanded", "/login", "/register", "/signup").permitAll())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
