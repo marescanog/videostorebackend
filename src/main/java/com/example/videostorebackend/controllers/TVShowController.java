@@ -100,4 +100,22 @@ public class TVShowController {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "TV Show not found!"));
     }
+
+
+    @PutMapping(path = "/updateTV/{id}", consumes = "application/json")
+    public ResponseEntity<?> updateTVShow(@PathVariable String id, @RequestBody TVShow tvShow) {
+        Optional<TVShow> updatedTVShow = service.updateTVShow(id, tvShow);
+
+        if(updatedTVShow.isPresent()){
+            return ResponseEntity.ok(updatedTVShow);
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "TV Show not found!"));
+    }
+
+    @DeleteMapping("/deleteTV/{id}")
+    public ResponseEntity<?> deleteTVShow(@PathVariable String id) {
+        service.deleteTVShow(id);
+        return ResponseEntity.ok("deleted");
+    }
 }

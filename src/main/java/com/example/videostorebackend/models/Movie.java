@@ -12,27 +12,27 @@ public class Movie {
     private String id;
     private String title;
     private String description;
-    private String rating;
+    private Float rating;
     private List<String> genre;
-    private float rentPrice;
-    private float buyPrice;
+    private Float rentPrice;
+    private Float buyPrice;
     private String posterImage;
     private String backgroundImage;
     private String MPARating;
-    private int length;
+    private Integer length;
     private String releaseDate;
     private String TrailerUrl;
-    private boolean IsFeatured;
+    private Boolean IsFeatured;
     private String addedOn;
     private String promoType;
-    private boolean mostDemanded;
-    private String releaseYear;
-    private int totalRatings;
+    private Boolean mostDemanded;
+    private Integer releaseYear;
+    private Integer totalRatings;
 
     public Movie() {
     }
 
-    public Movie(String id, String title, String description, String rating, List<String> genre, float rentPrice, float buyPrice, String posterImage, String backgroundImage, String MPARating, int length, String releaseDate, String trailerUrl, boolean isFeatured, String addedOn, String promoType, boolean mostDemanded, String releaseYear, int totalRatings) {
+    public Movie(String id, String title, String description, Float rating, List<String> genre, Float rentPrice, Float buyPrice, String posterImage, String backgroundImage, String MPARating, Integer length, String releaseDate, String trailerUrl, Boolean isFeatured, String addedOn, String promoType, Boolean mostDemanded, Integer releaseYear, Integer totalRatings) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -78,11 +78,11 @@ public class Movie {
         this.description = description;
     }
 
-    public String getRating() {
+    public Float getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 
@@ -94,19 +94,19 @@ public class Movie {
         this.genre = genre;
     }
 
-    public float getRentPrice() {
+    public Float getRentPrice() {
         return rentPrice;
     }
 
-    public void setRentPrice(float rentPrice) {
+    public void setRentPrice(Float rentPrice) {
         this.rentPrice = rentPrice;
     }
 
-    public float getBuyPrice() {
+    public Float getBuyPrice() {
         return buyPrice;
     }
 
-    public void setBuyPrice(float buyPrice) {
+    public void setBuyPrice(Float buyPrice) {
         this.buyPrice = buyPrice;
     }
 
@@ -134,11 +134,11 @@ public class Movie {
         this.MPARating = MPARating;
     }
 
-    public int getLength() {
+    public Integer getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(Integer length) {
         this.length = length;
     }
 
@@ -158,11 +158,11 @@ public class Movie {
         TrailerUrl = trailerUrl;
     }
 
-    public boolean isFeatured() {
+    public Boolean isFeatured() {
         return IsFeatured;
     }
 
-    public void setFeatured(boolean featured) {
+    public void setFeatured(Boolean featured) {
         IsFeatured = featured;
     }
 
@@ -182,27 +182,27 @@ public class Movie {
         this.promoType = promoType;
     }
 
-    public boolean isMostDemanded() {
+    public Boolean isMostDemanded() {
         return mostDemanded;
     }
 
-    public void setMostDemanded(boolean mostDemanded) {
+    public void setMostDemanded(Boolean mostDemanded) {
         this.mostDemanded = mostDemanded;
     }
 
-    public String getReleaseYear() {
+    public Integer getReleaseYear() {
         return releaseYear;
     }
 
-    public void setReleaseYear(String releaseYear) {
+    public void setReleaseYear(Integer releaseYear) {
         this.releaseYear = releaseYear;
     }
 
-    public int getTotalRatings() {
+    public Integer getTotalRatings() {
         return totalRatings;
     }
 
-    public void setTotalRatings(int totalRatings) {
+    public void setTotalRatings(Integer totalRatings) {
         this.totalRatings = totalRatings;
     }
 

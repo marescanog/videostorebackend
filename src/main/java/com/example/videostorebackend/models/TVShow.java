@@ -10,30 +10,30 @@ public class TVShow {
     @Id
     private String id;
     private String title;
-    private int numOfSeasons;
-    private int numOfTotalEpisodes;
+    private Integer numOfSeasons;
+    private Integer numOfTotalEpisodes;
     private String description;
     private String rating;
     private List<String> genre;
-    private float rentPrice;
-    private float buyPrice;
+    private Float rentPrice;
+    private Float buyPrice;
     private String posterImage;
     private String backgroundImage;
     private String releaseDate;
     private String promoType;
     private String addedOn;
     private String releaseYear;
-    private int totalRatings;
-    private boolean IsFeatured;
+    private Integer totalRatings;
+    private Boolean IsFeatured;
     private String mparating;
     private String TrailerUrl;
-    private boolean mostDemanded;
+    private Boolean mostDemanded;
 
 
     public TVShow() {
     }
 
-    public TVShow(String id, String title, int numOfSeasons, int numOfTotalEpisodes, String description, String rating, List<String> genre, float rentPrice, float buyPrice, String posterImage, String backgroundImage, String releaseDate, String promoType, String addedOn, String releaseYear, int totalRatings, boolean isFeatured, String mparating, String trailerUrl, boolean mostDemanded) {
+    public TVShow(String id, String title, Integer numOfSeasons, Integer numOfTotalEpisodes, String description, String rating, List<String> genre, Float rentPrice, Float buyPrice, String posterImage, String backgroundImage, String releaseDate, String promoType, String addedOn, String releaseYear, Integer totalRatings, Boolean isFeatured, String mparating, String trailerUrl, Boolean mostDemanded) {
         this.id = id;
         this.title = title;
         this.numOfSeasons = numOfSeasons;
@@ -72,19 +72,19 @@ public class TVShow {
         this.title = title;
     }
 
-    public int getNumOfSeasons() {
+    public Integer getNumOfSeasons() {
         return numOfSeasons;
     }
 
-    public void setNumOfSeasons(int numOfSeasons) {
+    public void setNumOfSeasons(Integer numOfSeasons) {
         this.numOfSeasons = numOfSeasons;
     }
 
-    public int getNumOfTotalEpisodes() {
+    public Integer getNumOfTotalEpisodes() {
         return numOfTotalEpisodes;
     }
 
-    public void setNumOfTotalEpisodes(int numOfTotalEpisodes) {
+    public void setNumOfTotalEpisodes(Integer numOfTotalEpisodes) {
         this.numOfTotalEpisodes = numOfTotalEpisodes;
     }
 
@@ -112,19 +112,19 @@ public class TVShow {
         this.genre = genre;
     }
 
-    public float getRentPrice() {
+    public Float getRentPrice() {
         return rentPrice;
     }
 
-    public void setRentPrice(float rentPrice) {
+    public void setRentPrice(Float rentPrice) {
         this.rentPrice = rentPrice;
     }
 
-    public float getBuyPrice() {
+    public Float getBuyPrice() {
         return buyPrice;
     }
 
-    public void setBuyPrice(float buyPrice) {
+    public void setBuyPrice(Float buyPrice) {
         this.buyPrice = buyPrice;
     }
 
@@ -176,19 +176,19 @@ public class TVShow {
         this.releaseYear = releaseYear;
     }
 
-    public int getTotalRatings() {
+    public Integer getTotalRatings() {
         return totalRatings;
     }
 
-    public void setTotalRatings(int totalRatings) {
+    public void setTotalRatings(Integer totalRatings) {
         this.totalRatings = totalRatings;
     }
 
-    public boolean isFeatured() {
+    public Boolean isFeatured() {
         return IsFeatured;
     }
 
-    public void setFeatured(boolean featured) {
+    public void setFeatured(Boolean featured) {
         IsFeatured = featured;
     }
 
@@ -208,11 +208,11 @@ public class TVShow {
         TrailerUrl = trailerUrl;
     }
 
-    public boolean isMostDemanded() {
+    public Boolean isMostDemanded() {
         return mostDemanded;
     }
 
-    public void setMostDemanded(boolean mostDemanded) {
+    public void setMostDemanded(Boolean mostDemanded) {
         this.mostDemanded = mostDemanded;
     }
 

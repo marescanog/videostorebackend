@@ -111,4 +111,21 @@ public class MovieController {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "Movie not found!"));
     }
+
+    @PutMapping(path = "/updateMovie/{id}", consumes = "application/json")
+    public ResponseEntity<?> updateTVShow(@PathVariable String id, @RequestBody Movie movie) {
+        Optional<Movie> updatedMovie = service.updateMovie(id, movie);
+
+        if(updatedMovie.isPresent()){
+            return ResponseEntity.ok(updatedMovie);
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "Movie not found!"));
+    }
+
+    @DeleteMapping("/deleteMovie/{id}")
+    public ResponseEntity<?> deleteTVShow(@PathVariable String id) {
+        service.deleteMovie(id);
+        return ResponseEntity.ok("deleted");
+    }
 }

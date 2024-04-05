@@ -6,8 +6,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -103,5 +106,116 @@ public class MovieService {
 
     public Optional<Movie> getMovieById(String id) {
         return repository.findById(id);
+    }
+
+    public Optional<Movie> updateMovie(String id, Movie updatedMovie) {
+        Optional<Movie> found = repository.findById(id);
+
+        if(found.isEmpty()){
+            return Optional.empty();
+        }
+
+        return found
+                .map(movie -> {
+                    String title = updatedMovie.getTitle();
+                    String description = updatedMovie.getDescription();
+                    Float rating = updatedMovie.getRating();
+                    List<String> genre = updatedMovie.getGenre();
+                    Float rentPrice = updatedMovie.getRentPrice();
+                    Float buyPrice = updatedMovie.getBuyPrice();
+                    String posterImage = updatedMovie.getPosterImage();
+                    String backgroundImage = updatedMovie.getBackgroundImage();
+                    String MPARating = updatedMovie.getMPARating();
+                    Integer Length = updatedMovie.getLength();
+                    String releaseDate = updatedMovie.getReleaseDate();
+                    String TrailerUrl = updatedMovie.getTrailerUrl();
+                    Boolean IsFeatured = updatedMovie.isFeatured();
+                    String addedOn = updatedMovie.getAddedOn();
+                    String promoType = updatedMovie.getPromoType();
+                    Boolean mostDemanded = updatedMovie.isMostDemanded();
+                    Integer releaseYear = updatedMovie.getReleaseYear();
+                    Integer totalRatings = updatedMovie.getTotalRatings();
+
+                    if(title != null){
+                        movie.setTitle(title);
+                    }
+
+                    if(description != null){
+                        movie.setDescription(description);
+                    }
+
+                    if(rating != null){
+                        movie.setRating(rating);
+                    }
+
+                    if(genre != null){
+                        movie.setGenre(genre);
+                    }
+
+                    if(rentPrice != null){
+                        movie.setRentPrice(rentPrice);
+                    }
+
+                    if(buyPrice != null){
+                        movie.setBuyPrice(buyPrice);
+                    }
+
+                    if(posterImage != null){
+                        movie.setPosterImage(posterImage);
+                    }
+
+                    if(backgroundImage != null){
+                        movie.setBackgroundImage(backgroundImage);
+                    }
+
+                    if(MPARating != null){
+                        movie.setMPARating(MPARating);
+                    }
+
+                    if(Length != null){
+                        movie.setLength(Length);
+                    }
+
+                    if(releaseDate != null){
+                        movie.setReleaseDate(releaseDate);
+                    }
+
+                    if(TrailerUrl != null){
+                        movie.setTrailerUrl(TrailerUrl);
+                    }
+
+                    if(IsFeatured != null){
+                        movie.setFeatured(IsFeatured);
+                    }
+
+                    if(addedOn != null){
+                        movie.setAddedOn(addedOn);
+                    }
+
+                    if(promoType != null){
+                       movie.setPromoType(promoType);
+                    }
+
+                    if(mostDemanded != null){
+                        movie.setMostDemanded(mostDemanded);
+                    }
+
+                    if(releaseYear != null){
+                        movie.setReleaseYear(releaseYear);
+                    }
+
+                    if(totalRatings != null){
+                        movie.setTotalRatings(totalRatings);
+                    }
+                    
+                    return repository.save(movie);
+                });
+    }
+
+    public void deleteMovie(String id) {
+        if (!repository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found with id " + id);
+        }
+        repository.deleteById(id);
     }
 }

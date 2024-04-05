@@ -52,12 +52,14 @@ public class SecurityConfig {
                         config.setMaxAge(3600L);
                         return config;
                     }
-                })).csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers( "/register", "/signup")
+                })).csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers( "/register", "/signup",  "/updateTV/**", "/updateMovie/**", "/tvshows", "/movies", "/deleteTV/**", "/deleteMovie/**")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                         .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests((requests)->requests
                         .requestMatchers("/user","/users", "/singleUser/**").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/register", "/signup").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/register", "/signup", "/tvshows", "/movies").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/updateTV/**", "/updateMovie/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/deleteTV/**", "/deleteMovie/**").permitAll()
                         .requestMatchers( "/shows/**", "/tv**", "/tv/**","/movie/**", "/tvshow/**","/movies/**", "/movies**", "/", "/mostDemanded", "/login", "/register", "/signup").permitAll())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());

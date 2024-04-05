@@ -9,8 +9,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -77,4 +79,119 @@ public class TVShowService {
         return repository.findById(id);
     }
 
+    public Optional<TVShow> updateTVShow(String id, TVShow updatedTVShow) {
+        Optional<TVShow> found = repository.findById(id);
+
+        if(found.isEmpty()){
+            return Optional.empty();
+        }
+
+        return found
+                .map(tvShow -> {
+
+                    String title = updatedTVShow.getTitle();
+                    Integer numSeasons = updatedTVShow.getNumOfSeasons();
+                    Integer numEpisodes = updatedTVShow.getNumOfTotalEpisodes();
+                    String description = updatedTVShow.getDescription();
+                    String rating = updatedTVShow.getRating();
+                    List<String> genre = updatedTVShow.getGenre();
+                    Float rentPrice = updatedTVShow.getRentPrice();
+                    Float buyPrice = updatedTVShow.getBuyPrice();
+                    String posterImage = updatedTVShow.getPosterImage();
+                    String backgroundImage = updatedTVShow.getBackgroundImage();
+                    String releaseDate = updatedTVShow.getReleaseDate();
+                    String promoType = updatedTVShow.getPromoType();
+                    String addedOn = updatedTVShow.getAddedOn();
+                    String releaseYear = updatedTVShow.getReleaseYear();
+                    Integer totalRatings = updatedTVShow.getTotalRatings();
+                    Boolean IsFeatured = updatedTVShow.isFeatured();
+                    String mparating = updatedTVShow.getMparating();
+                    String trailerURL = updatedTVShow.getTrailerUrl();
+                    Boolean mostDemanded = updatedTVShow.isMostDemanded();
+
+                    if(title != null){
+                        tvShow.setTitle(title);
+                    }
+
+                    if(numSeasons != null){
+                        tvShow.setNumOfSeasons(numSeasons);
+                    }
+
+                    if(numEpisodes != null){
+                        tvShow.setNumOfSeasons(numEpisodes);
+                    }
+
+                    if(description != null){
+                        tvShow.setDescription(description);
+                    }
+
+                    if(rating != null){
+                        tvShow.setRating(rating);
+                    }
+
+                    if(genre != null){
+                        tvShow.setGenre(genre);
+                    }
+
+                    if(rentPrice != null){
+                        tvShow.setRentPrice(rentPrice);
+                    }
+
+                    if(buyPrice != null){
+                        tvShow.setBuyPrice(buyPrice);
+                    }
+
+                    if(posterImage != null){
+                        tvShow.setPosterImage(posterImage);
+                    }
+
+                    if(backgroundImage != null){
+                        tvShow.setBackgroundImage(backgroundImage);
+                    }
+
+                    if(releaseDate != null){
+                        tvShow.setReleaseDate(releaseDate);
+                    }
+
+                    if(promoType != null){
+                        tvShow.setPromoType(promoType);
+                    }
+
+                    if(addedOn != null){
+                        tvShow.setAddedOn(addedOn);
+                    }
+
+                    if(releaseYear != null){
+                        tvShow.setReleaseYear(releaseYear);
+                    }
+
+                    if(totalRatings != null){
+                        tvShow.setTotalRatings(totalRatings);
+                    }
+
+                    if(IsFeatured != null){
+                        tvShow.setFeatured(IsFeatured);
+                    }
+
+                    if(mparating != null){
+                        tvShow.setMparating(mparating);
+                    }
+
+                    if(trailerURL != null){
+                        tvShow.setTrailerUrl(trailerURL);
+                    }
+
+                    if(mostDemanded != null){
+                        tvShow.setMostDemanded(mostDemanded);
+                    }
+                    return repository.save(tvShow);
+                });
+    }
+
+    public void deleteTVShow(String id) throws ResponseStatusException{
+        if (!repository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "TVShow not found with id " + id);
+        }
+        repository.deleteById(id);
+    }
 }
