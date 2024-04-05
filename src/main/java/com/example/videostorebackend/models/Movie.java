@@ -1,6 +1,8 @@
 package com.example.videostorebackend.models;
 
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,23 +12,38 @@ import java.util.List;
 public class Movie {
     @Id
     private String id;
+    @NotBlank(message = "Title is required")
     private String title;
+    @NotBlank(message = "Description is required")
     private String description;
+    @NotNull(message = "Rating is required")
     private Float rating;
+    @NotNull(message = "List of genres is required")
     private List<String> genre;
+    @NotNull(message = "Rent price is required")
     private Float rentPrice;
+    @NotNull(message = "Buy Price is required")
     private Float buyPrice;
+    @NotBlank(message = "Poster Image is required")
     private String posterImage;
+    @NotBlank(message = "Background Image is required")
     private String backgroundImage;
+    @NotBlank(message = "Rating is required")
     private String MPARating;
+    @NotNull(message = "Movie length is required")
     private Integer length;
+    @NotBlank(message = "Release Date is required")
     private String releaseDate;
+    @NotBlank(message = "Trailer URL is required")
     private String TrailerUrl;
     private Boolean IsFeatured;
+    @NotBlank(message = "Date added on is required")
     private String addedOn;
     private String promoType;
     private Boolean mostDemanded;
+    @NotNull(message = "Release Year is required")
     private Integer releaseYear;
+    @NotNull(message = "Total Ratings is required")
     private Integer totalRatings;
 
     public Movie() {

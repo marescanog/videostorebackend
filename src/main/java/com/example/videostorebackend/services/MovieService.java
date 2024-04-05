@@ -207,7 +207,7 @@ public class MovieService {
                     if(totalRatings != null){
                         movie.setTotalRatings(totalRatings);
                     }
-                    
+
                     return repository.save(movie);
                 });
     }

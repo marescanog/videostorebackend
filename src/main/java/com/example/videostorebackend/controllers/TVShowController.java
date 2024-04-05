@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -86,8 +87,9 @@ public class TVShowController {
     }
 
     @PostMapping(value = "/tvshows",consumes={MediaType.APPLICATION_JSON_VALUE})
-    public void addTVShow(@RequestBody TVShow tvshow){
+    public ResponseEntity<?> addTVShow(@Validated  @RequestBody TVShow tvshow){
         service.insertIntoTVShows(tvshow);
+        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "Added new TV Show!"));
     }
 
     @GetMapping("/tvshow/{id}")

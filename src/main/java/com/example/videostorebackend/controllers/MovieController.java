@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -97,8 +98,9 @@ public class MovieController {
     }
 
     @PostMapping(value = "/movies",consumes={MediaType.APPLICATION_JSON_VALUE})
-    public void addMovie(@RequestBody Movie movie){
+    public ResponseEntity<?> addMovie(@Validated  @RequestBody Movie movie){
         service.insertIntoMovies(movie);
+        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "Added new Movie!"));
     }
 
     @GetMapping("/movie/{id}")

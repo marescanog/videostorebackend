@@ -1,5 +1,7 @@
 package com.example.videostorebackend.models;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,23 +11,40 @@ import java.util.List;
 public class TVShow {
     @Id
     private String id;
+    @NotBlank(message = "Title is required")
     private String title;
+    @NotNull(message = "Number of seasons is required")
     private Integer numOfSeasons;
+    @NotNull(message = "Number of total episodes is required")
     private Integer numOfTotalEpisodes;
+    @NotBlank(message = "Description is required")
     private String description;
+    @NotBlank(message = "Rating is required")
     private String rating;
+    @NotNull(message = "List of genres is required")
     private List<String> genre;
+    @NotNull(message = "Rent price is required")
     private Float rentPrice;
+    @NotNull(message = "Buy Price is required")
     private Float buyPrice;
+    @NotBlank(message = "Poster Image is required")
     private String posterImage;
+    @NotBlank(message = "Background Image is required")
     private String backgroundImage;
+    @NotBlank(message = "Release Date is required")
     private String releaseDate;
+    @NotBlank(message = "Promo Type is required")
     private String promoType;
+    @NotBlank(message = "Date added on is required")
     private String addedOn;
+    @NotBlank(message = "Release year is required")
     private String releaseYear;
+    @NotNull(message = "Total Ratings is required")
     private Integer totalRatings;
     private Boolean IsFeatured;
+    @NotBlank(message = "MPA rating is required")
     private String mparating;
+    @NotBlank(message = "Trailer URL is required")
     private String TrailerUrl;
     private Boolean mostDemanded;
 
