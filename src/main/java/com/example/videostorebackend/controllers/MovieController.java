@@ -99,8 +99,11 @@ public class MovieController {
 
     @PostMapping(value = "/movies",consumes={MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> addMovie(@Validated  @RequestBody Movie movie){
-        service.insertIntoMovies(movie);
-        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "Added new Movie!"));
+        Optional<Movie> newlyAddedMovie = service.insertIntoMovies(movie);
+        if(newlyAddedMovie.isPresent()){
+            return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("newlyAddedMovie", newlyAddedMovie));
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("message", "Something went wrong!"));
     }
 
     @GetMapping("/movie/{id}")
@@ -111,7 +114,7 @@ public class MovieController {
             return ResponseEntity.ok(found);
         }
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "Movie not found!"));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "Movie with id "+id+" not found!"));
     }
 
     @PutMapping(path = "/updateMovie/{id}", consumes = "application/json")
@@ -122,12 +125,17 @@ public class MovieController {
             return ResponseEntity.ok(updatedMovie);
         }
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "Movie not found!"));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "Movie with id "+id+" not found!"));
     }
 
     @DeleteMapping("/deleteMovie/{id}")
     public ResponseEntity<?> deleteTVShow(@PathVariable String id) {
-        service.deleteMovie(id);
-        return ResponseEntity.ok("deleted");
+        Optional<Movie> deletedMovie = service.deleteMovie(id);
+
+        if(deletedMovie.isPresent()){
+            return ResponseEntity.ok().body(Map.of("deletedMovie", deletedMovie));
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "Movie with id "+id+" not found!"));
     }
 }

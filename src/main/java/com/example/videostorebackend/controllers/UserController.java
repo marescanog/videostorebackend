@@ -53,7 +53,7 @@ public class UserController {
         user.setPassword(encoder.encode(signUpRequest.getPassword()));
         user.setRole("user");
         service.createUser(user);
-        return ResponseEntity.ok("User registered successfully!");
+        return ResponseEntity.ok().body(Map.of("message", "User Registration Successful!"));
     }
 
     @GetMapping("/singleUser/{id}")

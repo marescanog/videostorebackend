@@ -36,8 +36,8 @@ public class MovieService {
     }
 
 
-    public void insertIntoMovies(Movie movie){
-        repository.insert(movie);
+    public Optional<Movie> insertIntoMovies(Movie movie){
+        return Optional.of(repository.insert(movie));
     }
 
     public List<Movie> getFilteredSearch(String free, String genre, String sort, String name) {
@@ -212,10 +212,23 @@ public class MovieService {
                 });
     }
 
-    public void deleteMovie(String id) {
-        if (!repository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found with id " + id);
+    public Optional<Movie> deleteMovie(String id) {
+        Optional<Movie> found = repository.findById(id);
+        // can also use repository.existsById(id) but since the requirement is to return the deleted object
+        // using this function instead
+        if(found.isEmpty()){
+            return Optional.empty();
         }
+
+        if(id.isEmpty()){
+            return Optional.empty();
+        }
+
         repository.deleteById(id);
+
+        return found;
     }
 }
+
+
+

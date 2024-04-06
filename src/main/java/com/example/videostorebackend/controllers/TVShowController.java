@@ -88,8 +88,11 @@ public class TVShowController {
 
     @PostMapping(value = "/tvshows",consumes={MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> addTVShow(@Validated  @RequestBody TVShow tvshow){
-        service.insertIntoTVShows(tvshow);
-        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "Added new TV Show!"));
+        Optional<TVShow> newlyAddedShow = service.insertIntoTVShows(tvshow);
+        if(newlyAddedShow.isPresent()){
+            return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("newlyAddedShow", newlyAddedShow));
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("message", "Something went wrong!"));
     }
 
     @GetMapping("/tvshow/{id}")
@@ -100,7 +103,7 @@ public class TVShowController {
             return ResponseEntity.ok(found);
         }
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "TV Show not found!"));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "TV Show with id "+id+" not found!"));
     }
 
 
@@ -112,12 +115,17 @@ public class TVShowController {
             return ResponseEntity.ok(updatedTVShow);
         }
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "TV Show not found!"));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "TV Show with id "+id+" not found!"));
     }
 
     @DeleteMapping("/deleteTV/{id}")
     public ResponseEntity<?> deleteTVShow(@PathVariable String id) {
-        service.deleteTVShow(id);
-        return ResponseEntity.ok("deleted");
+        Optional<TVShow> deletedShow = service.deleteTVShow(id);
+
+        if(deletedShow.isPresent()){
+            return ResponseEntity.ok().body(Map.of("deletedShow", deletedShow));
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "TV Show with id "+id+" not found!"));
     }
 }

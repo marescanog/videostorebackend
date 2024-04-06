@@ -71,8 +71,8 @@ public class TVShowService {
         return mongoTemplate.find(query, TVShow.class);
     }
 
-    public void insertIntoTVShows(TVShow tvshow){
-        repository.insert(tvshow);
+    public Optional<TVShow> insertIntoTVShows(TVShow tvshow){
+        return Optional.of(repository.insert(tvshow));
     }
 
     public Optional<TVShow> getTVShowById(String id) {
@@ -188,10 +188,20 @@ public class TVShowService {
                 });
     }
 
-    public void deleteTVShow(String id) throws ResponseStatusException{
-        if (!repository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "TVShow not found with id " + id);
+    public Optional<TVShow> deleteTVShow(String id) throws ResponseStatusException{
+        Optional<TVShow> found = repository.findById(id);
+        // can also use repository.existsById(id) but since the requirement is to return the deleted object
+        // using this function instead
+        if(found.isEmpty()){
+            return Optional.empty();
         }
+
+        if(id.isEmpty()){
+            return Optional.empty();
+        }
+
         repository.deleteById(id);
+
+        return found;
     }
 }

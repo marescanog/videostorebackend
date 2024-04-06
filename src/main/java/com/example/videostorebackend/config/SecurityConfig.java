@@ -44,7 +44,7 @@ public class SecurityConfig {
                         CorsConfiguration config = new CorsConfiguration();
                         config.setAllowedOrigins(Arrays.asList(
                                 "http://localhost:3000", // Local development domain
-                                "https://cjv-video-store-qybnro8a4-jonesyjacks-projects.vercel.app"   // Production domain
+                                "https://cjv-video-store-auzjmkoxs-jonesyjacks-projects.vercel.app"   // Production domain
                         ));
                         config.setAllowedMethods(Collections.singletonList("*"));
                         config.setAllowCredentials(true);
@@ -56,11 +56,11 @@ public class SecurityConfig {
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                         .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests((requests)->requests
-                        .requestMatchers("/user","/users", "/singleUser/**").authenticated()
+                        .requestMatchers("/user","/users").authenticated()
                         .requestMatchers(HttpMethod.POST, "/register", "/signup", "/tvshows", "/movies").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/updateTV/**", "/updateMovie/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/deleteTV/**", "/deleteMovie/**").permitAll()
-                        .requestMatchers( "/shows/**", "/tv**", "/tv/**","/movie/**", "/tvshow/**","/movies/**", "/movies**", "/", "/mostDemanded", "/login", "/register", "/signup").permitAll())
+                        .requestMatchers("/singleUser/**", "/shows/**", "/tv**", "/tv/**","/movie/**", "/tvshow/**","/movies/**", "/movies**", "/", "/mostDemanded", "/login", "/register", "/signup").permitAll())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
